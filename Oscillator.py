@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 def oscillator(x,t):
     # The initial x passed to the function will have the initial position in the first position
     # and the initial velocity in the second position
-    c_1 = 3
-    c_2 = 4
+    c_1 = 6
+    c_2 = 10
     k_1 = 25 # N/m
     k_2 = 30 # N/m
     k_3 = 22 # N/m
@@ -28,21 +28,23 @@ def oscillator(x,t):
     return solution
 
 # the time from 0 to 30 s with 500 points
-t = np.linspace(0, 30, 500)
+t = np.linspace(0, 10, 1500)
 
-inits = [10, 0]
+initial = [5, 0]
 
 # inital velocity is zero
 #the output will 2 columns - 1. Velocity and 2. Acceleration as defined in the return of the function
-output = odeint(oscillator, inits, t)
+output = odeint(oscillator, initial, t)
 #plot acceleration and velocity
-plt.plot(t, output[:, 1],linewidth = 2, label = 'acceleration')
-plt.plot(t,output[:,0],'g:',linewidth = 2, label = 'velocity')
+plt.plot(t, output[:, 1],linewidth = 1, label = 'acceleration')
+plt.plot(t,output[:,0],'r--',linewidth = 2, label = 'velocity')
 plt.legend()
 plt.ylabel('x(t)')
-plt.xlabel('t')
+plt.xlabel('time(s)')
 plt.title('Motion for coupled oscillators')
 plt.show()
+
+
 #We will say that the velocity v = x^dot then x^ddot is v^dot no
 
 #define a function with the first argument being the variable you want to perform ODE on
