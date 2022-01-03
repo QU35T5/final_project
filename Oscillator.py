@@ -1,7 +1,4 @@
-#Considering the equation of motion for a simple pendulum
-#theta_doubledot = - (g/l)* sin(theta)
-
-#Import required libraties
+#Import required libraries
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
@@ -9,47 +6,46 @@ import matplotlib.pyplot as plt
 # Author: Marta B
 # Do not copy, this is a project for University class
 # Three oscillating springs with springs constants k_1,k_2 and k_1,2 are displaced from the origin x, describe the motion
-# of oscillating springs.
+# of oscillating springs. Considering the equation of motion for a 3-spring mass system
+# x_doubedot = -(c_1/m*x**3 + c_2/m*x**3 + k_1/m*x+k_2/m*x + k_3/m*x
+# -------------------------------------------------------------------------------
 
 def oscillator(x,t):
+    # The initial x passed to the function will have the initial position in the first position
+    # and the initial velocity in the second position
     c_1 = 3
     c_2 = 4
-    k_1 = 25
-    k_2 = 30
-    k_3 = 22
-    m_1 = 9
-    m_2 = 5
-    m = m_1 + m_2
+    k_1 = 25 # N/m
+    k_2 = 30 # N/m
+    k_3 = 22 # N/m
+    m_1 = 9  # kg
+    m_2 = 5  # kg
+    m = m_1 + m_2 #kg
+
+    # The output of the function will have the velocity in the first position and the acceleration in the second position
     solution = x[1],-(c_1/m*x[0]**3 + c_2/m*(x[0])**3 + k_1/m*x[0]+k_2/m*x[0] + k_3/m*x[0])
+
     return solution
 
-
-times = np.linspace(0, 30, 500)
+# the time from 0 to 30 s with 500 points
+t = np.linspace(0, 30, 500)
 
 inits = [10, 0]
 
 # inital velocity is zero
-output = odeint(oscillator, inits, times)
-
-plt.plot(times, output[:, 1])
+#the output will 2 columns - 1. Velocity and 2. Acceleration as defined in the return of the function
+output = odeint(oscillator, inits, t)
+#plot acceleration and velocity
+plt.plot(t, output[:, 1],linewidth = 2, label = 'acceleration')
+plt.plot(t,output[:,0],'g:',linewidth = 2, label = 'velocity')
+plt.legend()
 plt.ylabel('x(t)')
 plt.xlabel('t')
 plt.title('Motion for coupled oscillators')
 plt.show()
 #We will say that the velocity v = x^dot then x^ddot is v^dot no
-def func(x,t):
-    k = 10
-    m = 10
-    return(x[1], -k/m*x[0])
-time = np.linspace(0, 10, 500)
-init = [10,0]
-# inital velocity is zero
-output = odeint(func, init, time)
-plt.plot(time, output[:, 1], 'r')
-plt.show()
 
-
-    #define a function with the first argument being the variable you want to perform ODE on
+#define a function with the first argument being the variable you want to perform ODE on
 
 #def func_pendulum (theta,t):
 
