@@ -1,13 +1,13 @@
 
 #define a function with the first argument being the variable you want to perform ODE on
 
-#def func_pendulum (theta,t):
+def func_pendulum (theta,t):
 
     #The initial theta passed to the function will have the initial position in the first position and the initial velocity in the second position
-#   g  =9.8
-#    l = 0.5
+   g  =9.8
+    l = 0.5
     #The output of the function will have the velocity in the first position and the acceleration in the second position
-#    return[theta[1],-g/l*np.sin(theta[0])]
+    return[theta[1],-g/l*np.sin(theta[0])]
 
 
 #The initial theta passed to the function will have the initial position in the first position and the initial velocity in the second position
